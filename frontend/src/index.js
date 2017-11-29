@@ -7,12 +7,12 @@ import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 import reducer from './rootReducer'
-import logger from 'redux-logger'
+import { createLogger } from 'redux-logger'
 import thunk from 'redux-thunk'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-let middlewares = [thunk, logger]
+let middlewares = [thunk, createLogger({collapsed: true})]
 
 const store = createStore(
   reducer,

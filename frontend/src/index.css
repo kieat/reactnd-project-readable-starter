@@ -4,21 +4,89 @@ body {
   font-family: sans-serif;
 }
 
+div, span, ul, li, a, h4 {
+  float: left;
+  margin: 0px;
+  padding: 0px;
+  /*
+  overflow: hidden;
+  */
+  box-sizing: border-box;
+}
+
 li {
   list-style-type: none;
+  width: 100%;
+}
+
+a {
+  color: #222;
+}
+
+.App {
+  width: 100%;
+}
+.App > div {
+  width: 100%;
+}
+
+.categories-container {
+  background-color: #fff;
+  width: 200px;
+}
+
+.categories-header {
+  margin: 5px;
 }
 
 .categories {
-  float: left;
   background-color: #fff;
   color: #222;
-  padding-right: 20px;
-  margin: 5px 5px;
+  text-align: left;
+  width: 100%;
+}
+.categories li {
+  margin: 0px 10px;
+}
+.categories li.selected .link {
+  color: red;
+}
+
+.categories .link {
+  margin: 5px;
+}
+
+.posts {
+  width: 400px;
+}
+
+.posts li {
+  margin: 0px;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+}
+.posts li:last-child {
+  /*border-bottom: 1px solid #fff;*/
+}
+
+.posts .link {
+  width: 100%;
   text-align: left;
 }
-.categories .link {
-  float: left;
-  color: #222;
-  margin-top: 10px;
-  
+
+.posts .meta {
+  width: 100%;
+  font-size: 80%;
+  margin: 5px 0px;
+}
+
+
+.posts .meta span {
+  margin-right: 10px;
+}
+
+.posts .body {
+  width: 100%;
+  text-align: left;
+  background-color: #ddd;
 }

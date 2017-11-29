@@ -1,12 +1,13 @@
-import { GET_CATEGORIES } from './actions'
+import { GET_POSTS } from './actions'
 
 const initialState = {
+  selectedCategory: null,
   list: []
 }
 
-export function categories(state = initialState, action){
+export function posts(state = initialState, action){
   switch (action.type) {
-    case GET_CATEGORIES:
+    case GET_POSTS:
       /*return action.categories.reduce((categories, c) => {
         categories[c.name] = c.name
         categories[c.path] = c.path
@@ -15,7 +16,8 @@ export function categories(state = initialState, action){
       */
       return {
         ...state,
-        list: action.categories
+        selectedCategory: action.selectedCategory,
+        list: action.posts
       }
     default:
       return state;

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { asyncGetCategories } from './actions'
 import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 class Categories extends Component {
   componentDidMount(){
@@ -10,13 +11,18 @@ class Categories extends Component {
 
   render(){
     return(
+      <div className="categories-container">
+      <h4 className="categories-header"><Link to="/">Home</Link></h4>
       <ul className="categories">
         {this.props.categories && this.props.categories.map(c => (
-          <li key={c.name}>
-            <Link to="/" className="link">{c.name}</Link>
+          <li key={c.name} className={"category " + ( c.path === this.props.selectedCategory ? "selected" : "" )}>
+            <Link
+              to={"/category/" + c.path}
+              className="link">{c.name}</Link>
           </li>
         ))}
       </ul>
+      </div>
     )
   }
 }
@@ -24,13 +30,14 @@ class Categories extends Component {
 //export default Categories
 
 function mapStateToProps ( state ) {
-  console.log('mapStateToProps:', state)
+  //console.log('mapStateToProps:', state)
   return {
-    categories: state.categories
+    categories: state.categories.list,
+    selectedCategory: state.posts.selectedCategory
   }
 }
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps
   //mapDispatchToProps
-)(Categories)
+)(Categories))
