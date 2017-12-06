@@ -2,9 +2,10 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background-color: #eee;
 }
 
-div, span, ul, li, a, h4 {
+div, span, ul, li, a, p, h4 {
   float: left;
   margin: 0px;
   padding: 0px;
@@ -33,10 +34,14 @@ a {
 .categories-container {
   background-color: #fff;
   width: 200px;
+  margin-left: 10px;
+  margin-top: 10px;
 }
 
 .categories-header {
   margin: 5px;
+  width: 100%;
+  text-align: left;
 }
 
 .categories {
@@ -58,15 +63,19 @@ a {
 
 .posts {
   width: 400px;
+  background-color: #fff;
+  margin-left: 10px;
+  margin-top: 10px;
 }
 
 .posts li {
   margin: 0px;
   padding: 15px;
+  width: 100%;
   border-bottom: 1px solid #ddd;
 }
 .posts li:last-child {
-  /*border-bottom: 1px solid #fff;*/
+  border-bottom: 1px solid #fff;
 }
 
 .posts .link {
@@ -88,5 +97,48 @@ a {
 .posts .body {
   width: 100%;
   text-align: left;
-  background-color: #ddd;
+  background-color: #fff;
+  padding: 10px 0px;
+  border-top: 1px solid #eee;
+}
+
+.comments-container {
+  background-color: #fff;
+  padding-left: 5px;
+  width: 100%;
+  border-top: 1px solid #ddd;
+}
+
+.comments-header {
+  margin: 0px;
+  margin-top: 10px;
+  font-weight: normal;
+  width: 100%;
+  text-align: left;
+}
+
+.comments {
+  font-size: 90%;
+}
+
+.comments .body {
+  margin: 0px;
+  margin-left: 10px;
+  padding: 5px 0px;
+  border-top: 1px solid #fff;
+}
+
+.comments .meta-top {
+  margin: 0px;
+}
+.comments .meta-bottom {
+  margin: 0px;
+  margin-left: 10px;
+}
+.comments .meta .id {
+  display: none;
+}
+
+.comments li {
+  border-bottom: 1px solid #fff;
 }

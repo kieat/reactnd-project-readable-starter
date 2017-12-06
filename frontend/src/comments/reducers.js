@@ -1,13 +1,13 @@
-import { GET_POSTS } from './actions'
+import { GET_COMMENTS, CREATE_COMMENT } from './actions'
 
 const initialState = {
   list: [],
   selectedTarget: {}
 }
 
-export function posts(state = initialState, action){
+export function comments(state = initialState, action){
   switch (action.type) {
-    case GET_POSTS:
+    case GET_COMMENTS:
       /*return action.categories.reduce((categories, c) => {
         categories[c.name] = c.name
         categories[c.path] = c.path
@@ -17,8 +17,14 @@ export function posts(state = initialState, action){
 
       return {
         ...state,
-        list: action.posts,
+        list: Array.isArray(action.comments) ? action.comments : [action.comments],
         selectedTarget: action.selectedTarget
+      }
+    case CREATE_COMMENT:
+      return {
+        ...state,
+        list: state.list.concat([action.values]),
+        selectedTarget: {}
       }
     default:
       return state;

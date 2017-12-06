@@ -15,14 +15,22 @@ class App extends Component {
           <Route exact path='/' render={()=>(
             <div>
               <Categories />
-              <Posts />
+              <Posts selectedTarget={({type: 'category', value: null})} />
             </div>
           )}></Route>
           <Route exact path='/category/:path' render={(args) => {
             return (
               <div>
                 <Categories />
-                <Posts selectedCategory={args.match.params.path}/>
+                <Posts selectedTarget={({type: 'category', value: args.match.params.path})} />
+              </div>
+            )
+          }}></Route>
+          <Route exact path='/post/:id' render={(args) => {
+            return (
+              <div>
+                <Categories />
+                <Posts selectedTarget={({type: 'postId', value: args.match.params.id})}/>
               </div>
             )
           }}></Route>
