@@ -5,7 +5,7 @@ body {
   background-color: #eee;
 }
 
-div, span, ul, li, a, p, h4 {
+* {
   float: left;
   margin: 0px;
   padding: 0px;
@@ -22,6 +22,42 @@ li {
 
 a {
   color: #222;
+  cursor: pointer;
+}
+
+a:hover {
+  text-decoration: underline;
+  text-decoration-color: #222;
+}
+
+button {
+  cursor: pointer;
+}
+
+.buttons {
+  width: 100%;
+  padding-left: 10px;
+  margin-top: 10px;
+  background-color: #fff;
+}
+
+.buttons a {
+  color: blue;
+  margin-right: 5px;
+  text-decoration: none;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.buttons a:hover {
+  text-decoration-color: blue;
+  color: #fff;
+  background-color: #ccc;
+}
+
+.hidden {
+  display: none;
 }
 
 .App {
@@ -61,11 +97,19 @@ a {
   margin: 5px;
 }
 
-.posts {
+.posts-container {
   width: 400px;
   background-color: #fff;
   margin-left: 10px;
   margin-top: 10px;
+}
+
+.posts-container h4 {
+  padding: 5px;
+}
+
+.posts {
+  width: 100%;
 }
 
 .posts li {
@@ -92,6 +136,7 @@ a {
 
 .posts .meta span {
   margin-right: 10px;
+  padding: 5px;
 }
 
 .posts .body {
@@ -100,6 +145,46 @@ a {
   background-color: #fff;
   padding: 10px 0px;
   border-top: 1px solid #eee;
+}
+
+.posts .buttons.in-posts {
+  margin: 0px;
+  width: auto;
+}
+
+.posts .buttons.post {
+  margin: 0px;
+  margin-bottom: 10px;
+}
+
+.posts .buttons.post a {
+  margin: 0px;
+  font-size: 80%;
+}
+
+.edit-post, .new-post {
+  width: 100%;
+  padding: 5px;
+}
+
+.edit-post .parent, .new-post .parent {
+  width: 100%;
+  padding: 5px;
+}
+
+.edit-post input, .new-post input {
+  width: 100%;
+  padding: 3px;
+}
+
+.edit-post [name=body], .new-post [name=body] {
+  width: 100%;
+  padding: 3px;
+}
+
+.edit-post button, .new-post button {
+  padding: 5px;
+  margin: 5px;
 }
 
 .comments-container {
@@ -124,21 +209,77 @@ a {
 .comments .body {
   margin: 0px;
   margin-left: 10px;
-  padding: 5px 0px;
+  padding: 5px 5px;
   border-top: 1px solid #fff;
+}
+.comments textarea.body {
+  margin: 0px;
+  padding: 0px;
+  margin: 10px;
+  border: 1px solid #ddd;
 }
 
 .comments .meta-top {
   margin: 0px;
 }
+.comments .meta-top span {
+  padding: 5px;
+}
 .comments .meta-bottom {
   margin: 0px;
   margin-left: 10px;
 }
-.comments .meta .id {
-  display: none;
+.comments .meta-bottom span {
+  padding: 5px;
+}
+.comments .buttons.comment {
+  margin: 0px;
+  width: auto;
+}
+
+.comments .buttons.comment a {
+  margin: 0px;
 }
 
 .comments li {
   border-bottom: 1px solid #fff;
+  padding: 10px 15px 0px;
+}
+
+.comments div.parent {
+  width: 100%;
+  padding: 5px 0px;
+}
+
+.new-comment input {
+  padding: 3px;
+}
+
+.new-comment [name=author] {
+  width: 200px;
+}
+
+.new-comment [name=body] {
+  width: 100%;
+  padding: 3px;
+}
+
+.new-comment button {
+  float: right;
+  padding: 5px;
+}
+
+.edit-comment {
+  width: 100%;
+  padding: 5px;
+}
+
+.edit-comment [name=body] {
+  width: 100%;
+  padding: 3px;
+}
+
+.edit-comment button {
+  float: right;
+  padding: 5px;
 }

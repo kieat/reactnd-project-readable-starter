@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Categories from './categories/components'
 import Posts from './posts/components'
+import CreatePost from './posts/create/component'
+import EditPost from './posts/edit/component'
 
 class App extends Component {
 
@@ -31,6 +33,22 @@ class App extends Component {
               <div>
                 <Categories />
                 <Posts selectedTarget={({type: 'postId', value: args.match.params.id})}/>
+              </div>
+            )
+          }}></Route>
+          <Route exact path='/new_post' render={(args) => {
+            return (
+              <div>
+                <Categories />
+                <CreatePost />
+              </div>
+            )
+          }}></Route>
+          <Route exact path='/edit_post/:id' render={(args) => {
+            return (
+              <div>
+                <Categories />
+                <EditPost selectedTarget={({type: 'postId', value: args.match.params.id})}/>
               </div>
             )
           }}></Route>

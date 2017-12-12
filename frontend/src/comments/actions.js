@@ -1,6 +1,8 @@
+import { rootURL } from '../config'
 import sortBy from 'sort-by';
+import axios from 'axios'
+
 export const GET_COMMENTS = 'GET_COMMENTS';
-export const CREATE_COMMENT = 'CREATE_COMMENT';
 
 function getComments({comments, selectedTarget}){
   return {
@@ -10,18 +12,9 @@ function getComments({comments, selectedTarget}){
   }
 }
 
-function createComment(values){
-  return {
-    type: CREATE_COMMENT,
-    values
-  }
-}
-
-const rootURL = 'http://localhost:3001'
-
 const getURL = (selectedTarget) => {
   let url = ""
-
+  //console.log('get URL: selectedTarget', selectedTarget)
   if ( selectedTarget.type === 'postId' ){
     url = `${rootURL}/posts/${selectedTarget.value}/comments`
   }else if ( selectedTarget.type === 'commentId' ){
@@ -31,6 +24,7 @@ const getURL = (selectedTarget) => {
   return url
 }
 
+/*
 const isNewTarget = (selectedTarget, prevTarget) => {
   let isNewTarget = false
 
@@ -48,44 +42,26 @@ const isNewTarget = (selectedTarget, prevTarget) => {
 
   return isNewTarget;
 }
-
+*/
 
 export function asyncGetComments(selectedTarget, prevTarget){
   return (dispatch, getState) => {
     //const oldId = getState().posts.selectedPost.id
     const url = getURL(selectedTarget)
 
+    /*
     if ( typeof(prevTarget) === 'undefined' ){
       prevTarget = getState().comments.selectedTarget
     }
 
     if ( isNewTarget(selectedTarget, prevTarget) ){
-      fetch(url, { headers: {'Authorization': 'udacity-project'} })
-          .then(result => result.json())
+    }
+    */
+      axios.get(url)
           .then(result => {
             //console.log('Posts', Array.isArray(result))
             //console.log('Posts', result)
-            dispatch(getComments({comments: result.sort(sortBy('-timestamp')), selectedTarget: selectedTarget}))
+            dispatch(getComments({comments: result.data.sort(sortBy('-timestamp')), selectedTarget: selectedTarget}))
           })
-    }
-  }
-}
-
-export function asyncCreateComment(values){
-  return (dispatch, getState) => {
-    //const oldId = getState().posts.selectedPost.id
-    const url = `${rootURL}/comments`
-
-    fetch(url, {
-          headers: {'Authorization': 'udacity-project'},
-          method: 'post',
-          body: JSON.stringify(values)
-        })
-        .then(result => result.json())
-        .then(result => {
-          //console.log('Posts', Array.isArray(result))
-          console.log('AfterCreateComment', result)
-          dispatch(createComment(values))
-        })
   }
 }

@@ -1,4 +1,7 @@
+import { rootURL } from '../config'
 import sortBy from 'sort-by';
+import axios from 'axios'
+
 export const GET_POSTS = 'GET_POSTS';
 
 export function getPosts({posts, selectedTarget}){
@@ -14,10 +17,10 @@ const getURL = (selectedTarget) => {
 
   if ( selectedTarget.type === 'category' ){
     url = selectedTarget.value
-              ? `http://localhost:3001/${selectedTarget.value}/posts`
-              : 'http://localhost:3001/posts';
+              ? `${rootURL}/${selectedTarget.value}/posts`
+              : `${rootURL}/posts`;
   }else if ( selectedTarget.type === 'postId' ){
-    url = `http://localhost:3001/posts/${selectedTarget.value}`
+    url = `${rootURL}/posts/${selectedTarget.value}`
   }
 
   return url
@@ -51,13 +54,20 @@ export function asyncGetPosts(selectedTarget, prevTarget){
       prevTarget = getState().posts.selectedTarget
     }
 
-    if ( isNewTarget(selectedTarget, prevTarget) ){
-      fetch(url, { headers: {'Authorization': 'udacity-project'} })
-          .then(result => result.json())
+    if ( isNewTarget(selectedTarget, prevTarget) || getState().posts.reloadList === true ){
+      axios.get(url)
           .then(result => {
             //console.log('Posts', Array.isArray(result))
-            //console.log('Posts', result)
-            dispatch(getPosts({posts: Array.isArray(result) ? result.sort(sortBy('-timestamp')) : [result], selectedTarget: selectedTarget}))
+            console.log('Posts', result)
+            dispatch(getPosts({
+              posts: Array.isArray(result.data)
+                  ? result.data.sort(sortBy('-timestamp'))
+                  : result.data && Object.keys(result.data).length > 0 ? [result.data] : [],
+              selectedTarget: selectedTarget
+            }))
+          })
+          .catch(error => {
+
           })
     }
   }
