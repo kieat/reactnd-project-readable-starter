@@ -60,15 +60,14 @@ export function posts(state = initialState, action){
       case DELETE_POST:
         return {
           ...state,
+          selectedTarget: {},
+          /*
           selectedTarget: {
             type: 'category',
-            value: state.list.reduce((cId, p) => {
-              if ( p.id === action.id )
-                cId = p.category
-              return cId
-            }, null)
+            value: action.values.category
           },
-          list: state.list.filter(c => c.id !== action.id)
+          */
+          list: state.list.filter(c => c.id !== action.values.id)
         }
       case UP_VOTE:
         return {

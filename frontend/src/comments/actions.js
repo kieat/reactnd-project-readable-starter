@@ -1,4 +1,4 @@
-import { rootURL } from '../config'
+import { rootURL, requestConfig } from '../config'
 import sortBy from 'sort-by';
 import axios from 'axios'
 
@@ -57,7 +57,7 @@ export function asyncGetComments(selectedTarget, prevTarget){
     if ( isNewTarget(selectedTarget, prevTarget) ){
     }
     */
-      axios.get(url)
+      axios.get(url, requestConfig)
           .then(result => {
             //console.log('Posts', Array.isArray(result))
             //console.log('Posts', result)

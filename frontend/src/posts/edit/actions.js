@@ -1,4 +1,4 @@
-import { rootURL } from '../../config'
+import { rootURL, requestConfig } from '../../config'
 import axios from 'axios'
 import { reset } from 'redux-form'
 
@@ -24,7 +24,7 @@ export function asyncEditPost(values){
     const url = `${rootURL}/posts/${values.id}`
     console.log('before fetching check values:', values)
 
-    axios.put(url, values)
+    axios.put(url, values, requestConfig)
     .then(result => {
       //console.log('Posts', Array.isArray(result))
       console.log('AfterEditPost', result)

@@ -1,4 +1,4 @@
-import { rootURL } from '../../config'
+import { rootURL, requestConfig } from '../../config'
 import axios from 'axios'
 
 export const UP_VOTE = 'UP_VOTE';
@@ -30,7 +30,7 @@ export function asyncDownVote(selectedId){
 
 function callVote(selectedId, option, callback){
   const url = `${rootURL}/posts/${selectedId}`
-  axios.post(url, {id: selectedId, option: option})
+  axios.post(url, {id: selectedId, option: option}, requestConfig)
       .then(result => {
         //console.log('Posts', Array.isArray(result))
         //console.log('result of after Vote Post:', result)

@@ -1,22 +1,22 @@
-import { rootURL } from '../../config'
+import { rootURL, requestConfig } from '../../config'
 import axios from 'axios'
 
 export const DELETE_POST = 'DELETE_POST';
 
-function deletePost(id){
+function deletePost(values){
   return {
     type: DELETE_POST,
-    id
+    values
   }
 }
 
 export function asyncDeletePost(selectedPostId, history){
   return (dispatch, getState) => {
     const url = `${rootURL}/posts/${selectedPostId}`
-    axios.delete(url)
+    axios.delete(url, requestConfig)
         .then(result => {
           console.log('result of after Delete Post:', result)
-          dispatch(deletePost(result.data.id))
+          dispatch(deletePost(result.data))
           if (result.data.category){
             history.push(`/category/${result.data.category}`)
           }else{

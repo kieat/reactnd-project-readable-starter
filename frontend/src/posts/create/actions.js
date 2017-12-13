@@ -1,4 +1,4 @@
-import { rootURL } from '../../config'
+import { rootURL, requestConfig } from '../../config'
 import axios from 'axios'
 import { reset } from 'redux-form'
 
@@ -17,7 +17,7 @@ export function asyncCreatePost(values){
     const url = `${rootURL}/posts`
     console.log('before creating new post:', values)
 
-    axios.post(url, values)
+    axios.post(url, values, requestConfig)
     .then(result => {
       //console.log('AfterCreatePost', result, getState())
       dispatch(createPost(result.data))

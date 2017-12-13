@@ -1,9 +1,29 @@
-import axios from 'axios'
 import React from 'react';
 
-export const rootURL = 'http://localhost:3001'
+export const rootURL = window.location.hostname === 'localhost'
+	//? `${window.location.protocol}//${window.location.hostname}:3001`
+	? `http://localhost:3001`
+	//: `${window.location.origin}`.replace('3000','3001')
+	:	`${process.env.REACT_APP_BACKEND}`
 
-axios.defaults.headers.common['Authorization'] = 'udacity-project'
+const headers = {
+	headers: {
+		'Authorization': 'whatever-you-want',
+		'Accept': '*/*'
+	}
+}
+
+export const requestConfig = process.env.REACT_APP_BACKEND && process.env.REACT_APP_BACKEND !== window.location.origin
+	? {
+			...headers,
+		  credentials: 'include',
+			withCredentials: true
+	}
+	: {
+		...headers,
+		credentials: 'include'
+	}
+
 
 export const renderField = ({
   input,

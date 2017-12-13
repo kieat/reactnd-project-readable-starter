@@ -1,4 +1,4 @@
-import { rootURL } from '../config'
+import { rootURL, requestConfig } from '../config'
 import sortBy from 'sort-by';
 import axios from 'axios'
 
@@ -55,7 +55,7 @@ export function asyncGetPosts(selectedTarget, prevTarget){
     }
 
     if ( isNewTarget(selectedTarget, prevTarget) || getState().posts.reloadList === true ){
-      axios.get(url)
+      axios.get(url, requestConfig)
           .then(result => {
             //console.log('Posts', Array.isArray(result))
             console.log('Posts', result)
