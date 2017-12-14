@@ -27,30 +27,10 @@ class Categories extends Component {
   }
 }
 
-//export default Categories
-
 function mapStateToProps ( state ) {
-  //console.log('mapStateToProps:', state)
-  let selectedCategory = "";
-  if ( state.posts.selectedTarget && 'value' in state.posts.selectedTarget ){
-    switch (state.posts.selectedTarget.type){
-      case 'category':
-        selectedCategory = state.posts.selectedTarget.value
-        break;
-      case 'postId':
-        selectedCategory = state.posts.list.reduce((selectedCategory, p, idx) => { if(idx === 0){ return p.category }else{ return ""} }, "")
-        break;
-      default:
-        selectedCategory = ""
-        break;
-    }
-  }else{
-    selectedCategory = state.posts.list.reduce((selectedCategory, p, idx) => { if(idx === 0){ return p.category }else{ return ""} }, "")
-  }
-
   return {
     categories: state.categories.list,
-    selectedCategory: selectedCategory
+    selectedCategory: state.posts.selectedCategory
   }
 }
 

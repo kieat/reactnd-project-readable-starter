@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 
 import { connect } from 'react-redux'
@@ -8,9 +8,7 @@ import Posts from './posts/components'
 import CreatePost from './posts/create/component'
 import EditPost from './posts/edit/component'
 
-class App extends Component {
-
-  render() {
+function App(props){
     return (
       <Router>
         <div className="App">
@@ -61,7 +59,6 @@ class App extends Component {
         </div>
       </Router>
     );
-  }
 }
 
 function mapStateToProps ( state ) {

@@ -2,17 +2,11 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import { Field, reduxForm, change } from 'redux-form'
 import { connect } from 'react-redux'
-//import serializeForm from 'form-serialize'
-//import uuid from 'uuid/v4'
 import { renderField } from '../../config'
 
 import { asyncEditComment } from './actions'
 
 const handleSubmitEditComment = (values, dispatch, props) => {
-  //e.preventDefault()
-  //const values = serializeForm(e.target, { hash: true, empty: true });
-  //console.log("handlingSubmit", values)
-
   dispatch(asyncEditComment(
     {
       ...values,

@@ -73,7 +73,7 @@ export function asyncGetPosts(selectedTarget, prevTarget){
       axios.get(url, requestConfig)
           .then(result => {
             //console.log('Posts', Array.isArray(result))
-            console.log('Posts', result)
+            //console.log('Posts', result)
             dispatch(getPosts({
               posts: Array.isArray(result.data)
                   ? result.data

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { withRouter } from 'react-router-dom'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
@@ -43,21 +43,22 @@ const validate = (values, props) => {
   return errors
 }
 
-class CreateComment extends Component {
+//class CreateComment extends Component {
 
-  render(){
+//  render(){
     //console.log('rendering:', this.state)
+function CreateComment(props){
     return (
       <div>
         <h4>New Comment</h4>
-        <form onSubmit={this.props.handleSubmit(handleSubmitNewComment)} className="new-comment">
+        <form onSubmit={props.handleSubmit(handleSubmitNewComment)} className="new-comment">
           <Field component={renderField} type="text" name="author" placeholder="Author"></Field>
           <Field component={renderField} type="textarea" name="body" placeholder="Write your comment"></Field>
           <button>Submit</button>
         </form>
       </div>
     )
-  }
+//  }
 }
 
 function mapStateToProps(state){
@@ -65,11 +66,6 @@ function mapStateToProps(state){
   return {
   }
 }
-
-CreateComment = connect(
-  mapStateToProps
-  //mapDispatchToProps
-)(CreateComment)
 
 export default withRouter(reduxForm(
   {
@@ -79,4 +75,7 @@ export default withRouter(reduxForm(
     touchOnBlur: false,
     destroyOnUnmount: false
   }
-)(CreateComment))
+)(connect(
+  mapStateToProps
+  //mapDispatchToProps
+)(CreateComment)))

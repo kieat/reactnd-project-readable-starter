@@ -11,6 +11,7 @@ import { UP_VOTE, DOWN_VOTE } from './vote/actions'
 const initialState = {
   list: [],
   selectedTarget: {},
+  selectedCategory: "",
   reloadList: false,
   initialLoading: false,
   sortDirection: {
@@ -35,6 +36,11 @@ export function posts(state = initialState, action){
         ...state,
         list: action.posts,
         selectedTarget: action.selectedTarget,
+        selectedCategory: action.selectedTarget.type === 'category'
+                            ? action.selectedTarget.value
+                            : action.posts.length === 1
+                              ? action.posts[0].category
+                              : "",
         reloadList: false,
         initialLoading: true
       }

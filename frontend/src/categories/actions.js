@@ -17,7 +17,7 @@ export function asyncGetCategories(selectedTarget){
     if ( getState().categories.list.length === 0 || Boolean( selectedTarget && selectedTarget.type === 'category' )){
       axios.get(url, requestConfig)
         .then(result => {
-          console.log('result of get categories:', result)
+          //console.log('result of get categories:', result)
 
           if ( result.data.categories.filter(c => (
             selectedTarget && selectedTarget.type === 'category' && selectedTarget.value

@@ -9,14 +9,10 @@ import { asyncGetComments } from './actions'
 import { asyncDeleteComment } from './delete/actions'
 import { asyncUpVote, asyncDownVote } from './vote/actions'
 import { prepareEditing, cancelEditing } from './edit/actions'
-//import { Link } from 'react-router-dom'
 import CreateComment from './create/component'
 import EditComment from './edit/component'
 
 class Comments extends Component {
-  state = {
-    //commentToBeEditing: {}
-  }
 
   componentDidMount(){
     //console.log('componentDidMount-Comments.selectedTarget', this.props.selectedTarget)
