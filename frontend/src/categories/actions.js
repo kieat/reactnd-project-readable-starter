@@ -9,19 +9,34 @@ export function getCategories({categories}){
   }
 }
 
-export function asyncGetCategories(){
+export function asyncGetCategories(selectedTarget){
   return (dispatch, getState) => {
     const url = `${rootURL}/categories`;
     //const headers = { headers: {'Authorization': 'udacity-project'} };
 
-    if ( getState().categories.list.length === 0 ){
+    if ( getState().categories.list.length === 0 || Boolean( selectedTarget && selectedTarget.type === 'category' )){
       axios.get(url, requestConfig)
         .then(result => {
-          //console.log('result of get categories:', result)
-          dispatch(getCategories({categories: result.data.categories}))
+          console.log('result of get categories:', result)
+
+          if ( result.data.categories.filter(c => (
+            selectedTarget && selectedTarget.type === 'category' && selectedTarget.value
+            ? selectedTarget.value === c.path
+            : true
+          )).length === 0 ){
+            dispatch(getCategories({
+              categories: []
+            }))
+          }else{
+            dispatch(getCategories({
+              categories: result.data.categories
+            }))
+          }
+
         })
         .catch(error => {
           console.log(error)
+          dispatch(getCategories({categories: []}))
         })
     }else{
       //dispatch(getCategories({categories: getState().categories.list}))

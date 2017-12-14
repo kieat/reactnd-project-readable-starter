@@ -283,3 +283,10 @@ button {
   float: right;
   padding: 5px;
 }
+
+.error404 {
+  background-color: #fff;
+  padding: 5px;
+  margin-top: 10px;
+  margin-left: 10px;
+}

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import dateFormat from 'dateformat'
+import ThumbsUp from 'react-icons/lib/fa/thumbs-o-up'
+import ThumbsDown from 'react-icons/lib/fa/thumbs-o-down'
 
 import { asyncGetComments } from './actions'
 import { asyncDeleteComment } from './delete/actions'
@@ -93,8 +95,8 @@ class Comments extends Component {
                     : <a onClick={(e) => this.handleEdit(e, comment.id)}>edit</a>
                   }
 
-                  <a onClick={(e) => {e.preventDefault();this.props.dispatch(asyncUpVote(comment.id))}}>Good+1</a>
-                  <a onClick={(e) => {e.preventDefault();this.props.dispatch(asyncDownVote(comment.id))}}>Bad-1</a>
+                  <a onClick={(e) => {e.preventDefault();this.props.dispatch(asyncUpVote(comment.id))}}><ThumbsUp />+1</a>
+                  <a onClick={(e) => {e.preventDefault();this.props.dispatch(asyncDownVote(comment.id))}}><ThumbsDown />-1</a>
                 </div>
               </div>
 

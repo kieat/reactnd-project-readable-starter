@@ -1,4 +1,6 @@
-import { GET_POSTS } from './actions'
+import sortBy from 'sort-by';
+
+import { GET_POSTS, SORT_BY_DATE, SORT_BY_SCORE } from './actions'
 import { CREATE_POST } from './create/actions'
 import { DELETE_POST } from './delete/actions'
 import { EDIT_POST, DISABLE_INITIAL_LOADING } from './edit/actions'
@@ -10,8 +12,14 @@ const initialState = {
   list: [],
   selectedTarget: {},
   reloadList: false,
-  initialLoading: false
+  initialLoading: false,
+  sortDirection: {
+    by: 'date',
+    asc: true
+  }
 }
+
+let newDirection = {}
 
 export function posts(state = initialState, action){
   switch (action.type) {
@@ -30,6 +38,40 @@ export function posts(state = initialState, action){
         reloadList: false,
         initialLoading: true
       }
+      case SORT_BY_DATE:
+        newDirection = {
+          by: 'date',
+          asc: action.direction === undefined ? !state.sortDirection.asc : action.direction
+        }
+        if ( newDirection.by !== state.sortDirection.by )
+          newDirection.asc = action.direction === undefined ? true : action.direction
+
+        return {
+          ...state,
+          sortDirection: {
+            ...state.sortDirection,
+            by: newDirection.by,
+            asc: newDirection.asc
+          },
+          list: state.list.sort(sortBy(newDirection.asc ? 'timestamp' : '-timestamp'))
+        }
+      case SORT_BY_SCORE:
+        newDirection = {
+          by: 'score',
+          asc: action.direction === undefined ? !state.sortDirection.asc : action.direction
+        }
+        if ( newDirection.by !== state.sortDirection.by )
+          newDirection.asc = action.direction === undefined ? true : action.direction
+
+        return {
+          ...state,
+          sortDirection: {
+            ...state.sortDirection,
+            by: newDirection.by,
+            asc: newDirection.asc
+          },
+          list: state.list.sort(sortBy(newDirection.asc ? 'voteScore' : '-voteScore'))
+        }
       case CREATE_POST:
         return {
           ...state,

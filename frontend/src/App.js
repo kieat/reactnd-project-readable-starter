@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 import { connect } from 'react-redux'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Categories from './categories/components'
 import Posts from './posts/components'
 import CreatePost from './posts/create/component'
@@ -20,22 +20,27 @@ class App extends Component {
               <Posts selectedTarget={({type: 'category', value: null})} />
             </div>
           )}></Route>
-          <Route exact path='/category/:path' render={(args) => {
-            return (
-              <div>
-                <Categories />
-                <Posts selectedTarget={({type: 'category', value: args.match.params.path})} />
-              </div>
-            )
-          }}></Route>
-          <Route exact path='/post/:id' render={(args) => {
-            return (
-              <div>
-                <Categories />
-                <Posts selectedTarget={({type: 'postId', value: args.match.params.id})}/>
-              </div>
-            )
-          }}></Route>
+
+          <Switch>
+            <Route exact path='/edit_post/:id' render={(args) => {
+              return (
+                <div>
+                  <Categories />
+                  <EditPost selectedTarget={({type: 'postId', value: args.match.params.id})}/>
+                </div>
+              )
+            }}></Route>
+            <Route exact path='/:category/:post_id' render={(args) => {
+              return (
+                <div>
+                  <Categories />
+                  <Posts selectedTarget={({type: 'postId', value: args.match.params.post_id})}/>
+                </div>
+              )
+            }}></Route>
+          </Switch>
+
+          <Switch>
           <Route exact path='/new_post' render={(args) => {
             return (
               <div>
@@ -44,14 +49,15 @@ class App extends Component {
               </div>
             )
           }}></Route>
-          <Route exact path='/edit_post/:id' render={(args) => {
+          <Route exact path='/:path' render={(args) => {
             return (
               <div>
-                <Categories />
-                <EditPost selectedTarget={({type: 'postId', value: args.match.params.id})}/>
+                <Categories selectedTarget={({type: 'category', value: args.match.params.path})} />
+                <Posts selectedTarget={({type: 'category', value: args.match.params.path})} />
               </div>
             )
           }}></Route>
+          </Switch>
         </div>
       </Router>
     );

@@ -1,14 +1,29 @@
 import { rootURL, requestConfig } from '../config'
-import sortBy from 'sort-by';
 import axios from 'axios'
 
 export const GET_POSTS = 'GET_POSTS';
+export const SORT_BY_DATE = 'SORT_BY_DATE';
+export const SORT_BY_SCORE = 'SORT_BY_SCORE';
 
 export function getPosts({posts, selectedTarget}){
   return {
     type: GET_POSTS,
     posts,
     selectedTarget
+  }
+}
+
+export function sortByDate(direction){
+  return {
+    type: SORT_BY_DATE,
+    direction
+  }
+}
+
+export function sortByScore(direction){
+  return {
+    type: SORT_BY_SCORE,
+    direction
   }
 }
 
@@ -61,10 +76,11 @@ export function asyncGetPosts(selectedTarget, prevTarget){
             console.log('Posts', result)
             dispatch(getPosts({
               posts: Array.isArray(result.data)
-                  ? result.data.sort(sortBy('-timestamp'))
+                  ? result.data
                   : result.data && Object.keys(result.data).length > 0 ? [result.data] : [],
               selectedTarget: selectedTarget
             }))
+            dispatch(sortByDate(true))
           })
           .catch(error => {
 

@@ -18,7 +18,7 @@ export function asyncDeletePost(selectedPostId, history){
           console.log('result of after Delete Post:', result)
           dispatch(deletePost(result.data))
           if (result.data.category){
-            history.push(`/category/${result.data.category}`)
+            history.push(`/${result.data.category}`)
           }else{
             history.push(`/`)
           }
