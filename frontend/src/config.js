@@ -1,10 +1,11 @@
 import React from 'react';
 
-export const rootURL = window.location.hostname === 'localhost'
+export const rootURL = process.env.REACT_APP_BACKEND
 	//? `${window.location.protocol}//${window.location.hostname}:3001`
-	? `http://localhost:3001`
+	? `${process.env.REACT_APP_BACKEND}`
 	//: `${window.location.origin}`.replace('3000','3001')
-	:	`${process.env.REACT_APP_BACKEND}`
+	//:	`http://localhost:3001`
+	:	`${window.location.protocol}//${window.location.hostname}:3001`
 
 const headers = {
 	headers: {

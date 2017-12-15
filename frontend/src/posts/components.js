@@ -74,7 +74,10 @@ class Posts extends Component {
                 <div className="meta">
                   <span className="category">in '{post.category}'</span>
                   <div className="buttons in-posts">
-                    <a onClick={(e) => this.props.dispatch(asyncDeletePost(post.id, this.props.history))}>Delete Post</a>
+                    <Link to={`/edit_post/${post.id}`}>Edit</Link>
+                    <a onClick={(e) => this.props.dispatch(asyncDeletePost(post.id, this.props.history))}>Delete</a>
+                    <a onClick={(e) => {e.preventDefault();this.props.dispatch(asyncUpVote(post.id))}}><ThumbsUp />+1</a>
+                    <a onClick={(e) => {e.preventDefault();this.props.dispatch(asyncDownVote(post.id))}}><ThumbsDown />-1</a>
                   </div>
                 </div>
                 <Link to={`/${post.category}/${post.id}`} className="link">{post.title}</Link>
@@ -93,33 +96,35 @@ class Posts extends Component {
 
 
     return(
-      this.props.posts.length === 0
-      ? <Error404 />
-      : <div className="posts-container">
-          <div className="buttons">
-            <Link to="/new_post">New Post</Link>
-            {
-              ( this.props.posts.length === 1 && this.props.selectedTarget.type === 'postId' ) &&
-                <Link to={`/edit_post/${this.props.selectedTarget.value}`}>Edit</Link>
-            }
-            {
-              ( this.props.posts.length === 1 && this.props.selectedTarget.type === 'postId' ) &&
-                <a onClick={(e) => this.props.dispatch(asyncDeletePost(this.props.selectedTarget.value, this.props.history))}>Delete</a>
-            }
-            {
-              ( this.props.posts.length > 0 && this.props.selectedTarget.type === 'category' ) &&
-                <a onClick={(e) => this.props.dispatch(sortByDate())}>{this.props.sortDirection.by === 'date' && ( this.props.sortDirection.asc ? <SortAlphaAsc /> : <SortAlphaDesc /> )}<span>Sort by Date</span></a>
-            }
-            {
-              ( this.props.posts.length > 0 && this.props.selectedTarget.type === 'category' ) &&
-                <a onClick={(e) => this.props.dispatch(sortByScore())}>{this.props.sortDirection.by === 'score' && ( this.props.sortDirection.asc ? <SortAlphaAsc /> : <SortAlphaDesc /> )}<span>Sort by Score</span></a>
-            }
 
-          </div>
-          <ul className="posts">
-            { postsDom }
-          </ul>
+      <div className="posts-container">
+        <div className="buttons">
+          <Link to="/new_post">New Post</Link>
+          {
+            ( this.props.posts.length === 1 && this.props.selectedTarget.type === 'postId' ) &&
+              <Link to={`/edit_post/${this.props.selectedTarget.value}`}>Edit</Link>
+          }
+          {
+            ( this.props.posts.length === 1 && this.props.selectedTarget.type === 'postId' ) &&
+              <a onClick={(e) => this.props.dispatch(asyncDeletePost(this.props.selectedTarget.value, this.props.history))}>Delete</a>
+          }
+          {
+            ( this.props.posts.length > 0 && this.props.selectedTarget.type === 'category' ) &&
+              <a onClick={(e) => this.props.dispatch(sortByDate())}>{this.props.sortDirection.by === 'date' && ( this.props.sortDirection.asc ? <SortAlphaAsc /> : <SortAlphaDesc /> )}<span>Sort by Date</span></a>
+          }
+          {
+            ( this.props.posts.length > 0 && this.props.selectedTarget.type === 'category' ) &&
+              <a onClick={(e) => this.props.dispatch(sortByScore())}>{this.props.sortDirection.by === 'score' && ( this.props.sortDirection.asc ? <SortAlphaAsc /> : <SortAlphaDesc /> )}<span>Sort by Score</span></a>
+          }
+
         </div>
+        { this.props.posts.length === 0
+          ? <Error404 />
+          : <ul className="posts">
+              { postsDom }
+            </ul>
+        }
+      </div>
     )
   }
 }

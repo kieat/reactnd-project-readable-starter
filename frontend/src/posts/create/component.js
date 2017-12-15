@@ -48,7 +48,7 @@ class CreatePost extends Component {
 
   componentDidMount = () => {
     if ( this.props.categories.length > 0 )
-      this.props.dispatch(change('postForm', 'category', this.props.categories[0].path))
+      this.props.dispatch(change('postForm', 'category', this.props.selectedCategory || this.props.categories[0].path))
   }
 
   render(){
@@ -84,7 +84,8 @@ function mapStateToProps(state){
   return {
     categories: state.categories.list,
     selectedTarget: state.posts.selectedTarget,
-    reloadList: state.posts.reloadList
+    reloadList: state.posts.reloadList,
+    selectedCategory: state.posts.selectedCategory
   }
 }
 
